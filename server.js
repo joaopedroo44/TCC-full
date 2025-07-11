@@ -27,10 +27,10 @@ app.post ('/cadastro', async (req, res) => {
 
     try {
         //verificação de email
-        const verifica = await db.query ('SELEC * FROM usuarios WHERE email = $1', [email]);
+        const verifica = await db.query ('SELECT * FROM usuarios WHERE email = $1', [email]);
         if (verifica.rows.length > 0) {
             return res.status(400).send("Email já cadastrado.");
-        } 
+        }   
     
     //criptografa a senha
     const hash = await bcrypt.hash(senha, 10);
@@ -51,7 +51,5 @@ app.post ('/cadastro', async (req, res) => {
 //iniciação do servidor
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log('Servidor rodando em http://localhost:${PORT}');
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
-
-
